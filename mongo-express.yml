@@ -1,0 +1,43 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: mongo-express
+  labels:
+    app: mongo-express
+spec:
+  containers:
+    - name: mongo-express
+      image: mongo-express
+      ports:
+        - protocol: TCP
+          containerPort: 8081
+      env:
+        - name: ME_CONFIG_MONGODB_ADMINUSERNAME
+          value: root
+        - name: ME_CONFIG_MONGODB_ADMINPASSWORD
+          value: example
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-express-http
+spec:
+  selector:
+    app: mongo-express
+  ports:
+    - port: 8081
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: mongo-ingress
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            backend:
+              serviceName: mongo-express-http
+              servicePort: 8081
