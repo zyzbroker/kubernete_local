@@ -1,6 +1,6 @@
 # Run Kubernete Locally
 
-Using kubernete platform to manage cloud native applciations is A great idea for any company, small or large to cust the IT cost. This semi-intelligent cloud platform are rule-based application platform to heal and scale application without humnan interference. The optimization of resource allocation make it the No.1 choice of the cloud deployment strategy.
+Using kubernete platform to manage cloud native applciations is A great idea for any company, small or large to cut down the IT cost. This semi-intelligent cloud platform are rule-based application platform to heal and scale application without humnan interference. The optimization of resource allocation make it the No.1 choice of the cloud deployment strategy.
 
 The best way to understand and learn kubternete platform is to run it locally. In this repository, we show you how to do that.
 
