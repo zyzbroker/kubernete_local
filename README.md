@@ -19,6 +19,7 @@ We want to set up mongo DB environment so that we can manage mongo database from
 
 - install docker desktop
 - install kind
+- install kubectrl CLI
 
 ### step 2
 
@@ -28,9 +29,15 @@ Create a kubernete cluster
   kind create cluster --config cluster.yml
 ```
 
-### step 3
+### step 3 configure HTTPProxy
 
-install ingress controller from Contour and apply patch to forward hostports to inggress controller
+install ingress controller from Contour and configure envoy to forward hostports to inggress controller
+
+```sh
+  config-contour.sh
+```
+
+or
 
 ```sh
 
