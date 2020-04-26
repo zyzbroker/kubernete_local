@@ -8,6 +8,7 @@ The best way to understand and learn kubternete platform is to run it locally. I
 
 - kind
 - docker desktop
+- kubectl CLI
 
 ## Use Case
 
@@ -23,63 +24,28 @@ We want to set up mongo DB environment so that we can manage mongo database from
 
 ### step 2
 
-Create a kubernete cluster
+run start-all.sh to create kubernete cluster and resources
+
+- A cluster called "kind"
+- Contour ingress controller and envoy proxy for httpproxy
+- mongo resources, include pod, service, container
+- mongo express resources, include pod, service, container, proxymapping (web ui)
 
 ```sh
-  kind create cluster --config cluster.yml
+  ./start-all.sh
 ```
 
-### step 3 configure HTTPProxy
-
-install ingress controller from Contour and configure envoy to forward hostports to inggress controller
-
-```sh
-  config-contour.sh
-```
-
-or
-
-```sh
-
-  kubectl apply -f https://projectcontour.io/quickstart/contour.yaml
-
-  kubectl patch daemonsets -n projectcontour envoy -p '{"spec":{"template":{"spec":{"nodeSelector":{"ingress-ready":"true"},"tolerations":[{"key":"node-role.kubernetes.io/master","operator":"Equal","effect":"NoSchedule"}]}}}}'
-
-```
-
-### step 4
-
-create resources for mongo db
-
-```sh
-
-  kubectrl apply -f mongo.yml
-
-```
-
-### step 5
-
-create resource for mongo web ui
-
-```sh
-
-  kubectl apply -f mongo-express.yml
-
-```
-
-### step 6
+### step 3
 
 Pod and container creation need some time. Thus we need to check all pods are in the ready mode
 
 ```sh
-
     kubectl get pods
-
 ```
 
 ![get pods](/images/kubectl_get_pods.png)
 
-### step 7
+### step 4
 
 open web browser and type in "http://localhost", you should see mongo web UI as shown below
 
@@ -87,20 +53,10 @@ open web browser and type in "http://localhost", you should see mongo web UI as 
 
 ### step 8
 
-Once you have kubernet cluster running locally, you might want to clean up, here are several tips
-
-- delete resources
+Once you have kubernet cluster running locally, run the following sh script to stop and delete all resources
 
 ```sh
 
-  kubectl delete -f mongo.yml
-
-```
-
-- delete cluster
-
-```sh
-
-  kind delete cluster --name kind
+  ./stop-all.sh
 
 ```

@@ -16,6 +16,10 @@ spec:
           value: root
         - name: MONGO_INITDB_ROOT_PASSWORD
           value: example
+  volumes:
+    - name: mongodb-v
+      persistentVolumeClaim:
+        claimName: mongodb-pvc
 ---
 apiVersion: v1
 kind: Service
